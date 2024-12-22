@@ -4,6 +4,7 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\CustormerController;
 
 Route::get("/", [ProductController::class,"home"])->name('home');
 Route::prefix('products')->group(function () {
@@ -29,4 +30,13 @@ Route::prefix('order_details')->group(function () {
     Route::get('/{id}/edit', [OrderDetailController::class, 'edit'])->name('orderdetails.edit'); 
     Route::put('/{id}', [OrderDetailController::class, 'update'])->name('orderdetails.update'); 
     Route::delete('/{id}', [OrderDetailController::class, 'destroy'])->name('orderdetails.destroy'); 
+});
+
+Route::prefix('customers')->group(function () {
+    Route::get('/', [CustormerController::class, 'index'])->name('customers.index');
+    Route::get('/create', [CustormerController::class, 'create'])->name('customers.create');
+    Route::post('/store', [CustormerController::class, 'store'])->name('customers.store');
+    Route::get('/{id}/edit', [CustormerController::class, 'edit'])->name('customers.edit');
+    Route::put('/{id}', [CustormerController::class, 'update'])->name('customers.update');
+    Route::delete('/{id}', [CustormerController::class, 'destroy'])->name('customers.destroy');
 });
