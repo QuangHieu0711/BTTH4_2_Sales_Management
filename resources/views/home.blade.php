@@ -296,7 +296,7 @@
             </li>
 
             <li>
-                <a href="" class="nav-link link-body-emphasis">
+                <a href="{{route('customers.index')}}" class="nav-link link-body-emphasis">
                     <p class="d-flex align-items-center" style="position:fixed;">
                         <i class="bi bi-person" style="font-size: 20px;"></i>
                         <span class="ms-2">Customers</span>
