@@ -286,7 +286,7 @@
                 </a>
             </li>
             <li>
-            <a href="" class="nav-link link-body-emphasis">
+            <a href="{{route('products.index')}}" class="nav-link link-body-emphasis">
                 <p class="d-flex align-items-center" style="position:fixed;">
                 <i class="bi bi-box2" style="font-size: 20px;"></i>
                 <span class="ms-2">Products</span>
