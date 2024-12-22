@@ -15,7 +15,8 @@
                 </tr>
             </thead>
             <tbody>
-            
+
+
         @foreach ($products as $index => $product)
         <tr>
             <!-- Chỉ số bắt đầu từ 1 -->
