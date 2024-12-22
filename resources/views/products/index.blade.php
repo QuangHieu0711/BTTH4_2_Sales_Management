@@ -26,12 +26,10 @@
             <td>{{ $product->price }}</td>
             <td>{{ $product->quantity }}</td>
             <td>
-                <!-- Liên kết đến trang chỉnh sửa sách -->
                 <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm" title="Chỉnh sửa sản phẩm">
                     <i class="bi bi-pencil-square" style="font-size: 20px;"></i>
                 </a>
 
-                <!-- Form xóa sách -->
                 <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?')">
                     @csrf
                     @method('DELETE')
