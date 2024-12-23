@@ -101,4 +101,6 @@ public function index()
         $product = Product::findOrFail($id);
         return view('products.delete', compact('product'));
     }
+
+    
 }
