@@ -13,19 +13,17 @@ class OrderController extends Controller
     // Hiển thị danh sách đơn hàng
     public function index(Request $request)
     {
-        $orders = Order::with('customer') 
+        $orders = Order::with('customer')
             ->orderBy('id', 'desc')
-            ->paginate(10); 
-
-        $page = $request->input('page', 1); // Mặc định là trang 1
-        return view('orders.index', compact('orders', 'page'));
+            ->paginate(10);
+        
+        return view('orders.index', compact('orders'));
     }
-
     // Hiển thị form tạo mới đơn hàng
     public function create()
     {
-        $products = Product::all(); 
-        $customers = Customer::all(); 
+        $products = Product::all();
+        $customers = Customer::all();
 
         return view('orders.create', compact('products', 'customers'));
     }
@@ -33,15 +31,7 @@ class OrderController extends Controller
     // Lưu đơn hàng mới
     public function store(Request $request)
     {
-        // Validate thông tin đơn hàng
-        $request->validate([
-            'customer_id' => 'required|exists:customers,id',
-            'order_date' => 'required|date',
-            'status' => 'required|string|max:255',
-            'products' => 'required|array',
-            'products.*.product_id' => 'required|exists:products,id',
-            'products.*.quantity' => 'required|integer|min:1',
-        ]);
+        $this->validateOrder($request); // Sử dụng phương thức validateOrder() để validate thông tin
 
         // Tạo đơn hàng mới
         $order = Order::create([
@@ -51,44 +41,32 @@ class OrderController extends Controller
         ]);
 
         // Thêm chi tiết đơn hàng
-        foreach ($request->products as $product) {
-            OrderDetail::create([
-                'order_id' => $order->id,
-                'product_id' => $product['product_id'],
-                'quantity' => $product['quantity'],
-            ]);
-        }
+        $this->saveOrderDetails($order, $request->products);
 
         return redirect()->route('orders.index')->with('success', 'Đơn hàng đã được tạo thành công!');
     }
 
     // Hiển thị chi tiết đơn hàng
-
-    // public function show(Order $order)
-    // {
-    //     return view('order_details.show', compact('order'));
-    // }
-    
-    // Hiển thị form sửa thông tin đơn hàng
-    public function edit(Order $order)
+    public function show(Order $order)
     {
-        $products = Product::all(); 
-        $customers = Customer::all();
-
-        return view('orders.edit', compact('order', 'products', 'customers'));
+        return view('order_details.show', compact('order'));
     }
 
-    // Cập nhật thông tin đơn hàng
-    public function update(Request $request, Order $order)
+    // Hiển thị form sửa thông tin đơn hàng
+    public function edit($id)
     {
-        // Validate thông tin cập nhật
-        $request->validate([
-            'customer_id' => 'required|exists:customers,id',
-            'order_date' => 'required|date',
-            'status' => 'required|string|max:255',
-        ]);
+        $order = Order::findOrFail($id);
+        $customers = Customer::all();
+        $products = Product::all(); // Thêm dòng này để lấy danh sách sản phẩm
+        return view('orders.edit', compact('order', 'customers', 'products'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validateOrder($request); // Validate thông tin đơn hàng
 
         // Cập nhật thông tin đơn hàng
+        $order = Order::findOrFail($id);
         $order->update([
             'customer_id' => $request->customer_id,
             'order_date' => $request->order_date,
@@ -98,21 +76,73 @@ class OrderController extends Controller
         // Cập nhật chi tiết đơn hàng
         $order->orderDetails()->delete(); // Xóa tất cả chi tiết cũ
 
-        foreach ($request->products as $product) {
-            OrderDetail::create([
+        // Lưu lại chi tiết đơn hàng mới
+        $this->saveOrderDetails($order, $request->products);
+
+        return redirect()->route('orders.index')->with('success', 'Order updated successfully!');
+    }
+
+    protected function validateOrder(Request $request)
+    {
+        $request->validate([
+            'customer_id' => 'required|exists:customers,id',
+            'order_date' => 'required|date',
+            'status' => 'required|in:pending,processing,shipped,completed',
+            'products' => 'required|array',
+            'products.*.product_id' => 'required|exists:products,id',
+            'products.*.quantity' => 'required|integer|min:1',
+        ]);
+    }
+
+    // Xóa đơn hàng
+    public function destroy($id)
+    {
+        $order = Order::findOrFail($id);
+
+        // Xóa các chi tiết đơn hàng liên quan
+        $order->orderDetails()->delete();
+
+        // Xóa đơn hàng
+        $order->delete();
+
+        return redirect()->route('orders.index')->with('success', 'Order deleted successfully!');
+    }
+
+    // Hiển thị lịch sử đơn hàng của khách hàng
+    public function showOrderHistory(Customer $customer)
+    {
+        // Lấy danh sách đơn hàng của khách hàng
+        $orders = $customer->orders()->paginate(10);
+
+        // Đặt giá trị cho biến idColumnLabel
+        $idColumnLabel = 'Order ID';  // Hoặc thay bằng bất kỳ giá trị nào bạn muốn
+
+        // Truyền dữ liệu vào view
+        return view('orders.history', compact('orders', 'customer', 'idColumnLabel'));
+    }
+
+    // Phương thức dùng chung để validate thông tin đơn hàng
+    protected function saveOrderDetails(Order $order, array $products)
+    {
+        foreach ($products as $product) {
+            $order->orderDetails()->create([
                 'order_id' => $order->id,
                 'product_id' => $product['product_id'],
                 'quantity' => $product['quantity'],
             ]);
         }
-
-        return redirect()->route('orders.index')->with('success', 'Đơn hàng đã được cập nhật thành công!');
     }
 
-    // Xóa đơn hàng
-    public function destroy(Order $order)
+    // Phương thức hiển thị lịch sử đơn hàng của khách hàng (đã thêm vào)
+    public function customerOrderHistory(Customer $customer)
     {
-        $order->delete();
-        return redirect()->route('orders.index')->with('success', 'Đơn hàng đã được xóa thành công!');
+        // Lấy danh sách đơn hàng của khách hàng, phân trang 10 đơn hàng mỗi trang
+        $orders = $customer->orders()->paginate(10);
+        
+        // Đặt giá trị cho biến idColumnLabel
+        $idColumnLabel = 'Order ID';
+    
+        // Trả về view 'orders.history' với các tham số đã truyền
+        return view('orders.history', compact('customer', 'orders', 'idColumnLabel'));
     }
 }
