@@ -315,9 +315,8 @@
             <div class="dropdown fixed-bottom-end">
                 <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
                     data-bs-toggle="dropdown" aria-expanded="true">
-                    <img src="https://avatars.githubusercontent.com/u/162897498?v=4" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <span class="d-print-block"><strong>Thùy Liên</strong></span>
-                </a>
+                    <img src="https://avatars.githubusercontent.com/u/169624553?v=4" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <span class="d-print-block"><strong>Hiền Lương</strong></span>
                 <ul class="dropdown-menu text-small shadow">
                     <li><a class="dropdown-item" href="#">New project...</a></li>
                     <li><a class="dropdown-item" href="#">Settings</a></li>

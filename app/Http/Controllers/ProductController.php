@@ -95,4 +95,12 @@ public function index()
         $products->delete();
         return redirect()->route('products.index')->with('success', 'Product deleted successfully!');
     }
+
+    public function confirmDelete($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('products.delete', compact('product'));
+    }
+
+    
 }

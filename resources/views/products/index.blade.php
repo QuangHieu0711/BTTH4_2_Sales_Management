@@ -1,4 +1,9 @@
 @extends('layouts.app')
+@if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 @section('title', 'List Product')
 @section('content')
     <div class="container">
@@ -19,7 +24,6 @@
 
         @foreach ($products as $index => $product)
         <tr>
-            <!-- Chỉ số bắt đầu từ 1 -->
             <td>{{ $products->firstItem() + $index }}</td>
             <td>{{ $product->name }}</td>
             <td>{{ $product->description }}</td>
@@ -30,14 +34,11 @@
                     <i class="bi bi-pencil-square" style="font-size: 20px;"></i>
                 </a>
 
-                <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?')">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm" title="Xóa sản phẩm">
-                        <i class="bi bi-trash" style="font-size: 20px;"></i>
-                    </button>
-                </form>
-                </td>
+                <a href="{{ route('products.delete', $product->id) }}" class="btn btn-danger btn-sm" title="Xóa sản phẩm">
+                    <i class="bi bi-trash" style="font-size: 20px;"></i>
+                </a>
+
+            </td>
             </tr>
             @endforeach
             </tbody>

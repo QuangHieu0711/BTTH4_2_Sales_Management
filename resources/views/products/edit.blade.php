@@ -1,5 +1,9 @@
 @extends('layouts.app')
-
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif  
 @section('content')
     <div class="container">
         <h1 class="mb-4">Edit Product</h1>
