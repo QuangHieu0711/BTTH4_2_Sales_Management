@@ -38,7 +38,6 @@
                 <tbody>
                     @foreach ($orders as $order)
                     <tr>
-                        <!-- Tính thứ tự -->
                         <td>{{ ($orders->currentPage() - 1) * $orders->perPage() + $loop->iteration }}</td>
                         <td>{{ $order->customer->name }}</td>
                         <td>{{ $order->order_date }}</td>
@@ -71,17 +70,12 @@
                             @endswitch
                         </td>
                         <td>
-                            <!-- View Details Button -->
                             <a href="{{ route('orderdetails.index', $order->id) }}" class="view-detail" title="View Details"><i class="bi bi-eye text-primary ms-2"></i></a>
-                            <!-- Edit Button -->
                             <a href="{{ route('orders.edit', $order->id) }}" class="edit" data-toggle="tooltip" title="Edit"> <i class="bi bi-pencil-fill text-warning ms-2"></i></a>
-                            <!-- Delete Modal Button -->
                             <a href="#deleteOrderModal{{ $order->id }}" class="delete" data-bs-toggle="modal" title="Delete"><i class="bi bi-trash text-danger ms-4"></i></a>
-                            <!-- View Customer Order History -->
                             <a href="{{ route('orders.history', $order->customer->id) }}" class="view-history" title="View Order History">
                                 <i class="bi bi-clock-history text-secondary ms-2"></i>
                             </a>
-                            <!-- Delete Confirmation Modal -->
                             <div id="deleteOrderModal{{ $order->id }}" class="modal fade">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
