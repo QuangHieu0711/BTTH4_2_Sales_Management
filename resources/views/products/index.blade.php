@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        
+    @endif
 @section('title', 'List Product')
 @section('content')
     <div class="container">
@@ -19,7 +25,6 @@
 
         @foreach ($products as $index => $product)
         <tr>
-            <!-- Chỉ số bắt đầu từ 1 -->
             <td>{{ $products->firstItem() + $index }}</td>
             <td>{{ $product->name }}</td>
             <td>{{ $product->description }}</td>
