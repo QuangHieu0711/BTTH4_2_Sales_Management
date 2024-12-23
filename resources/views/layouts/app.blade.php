@@ -24,6 +24,15 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <style>
+        .badge-custom {
+            display: inline-block;
+            padding: 10px 20px;
+            /* Tăng padding để tăng chiều dài của thẻ */
+            text-align: center;
+            font-size: 14px;
+            /* Điều chỉnh kích thước font nếu cần */
+        }
+
         body {
             height: 100%;
         }
@@ -278,7 +287,7 @@
 
         <ul class="nav nav-pills flex-column mb-auto">
             <li>
-                <a href="" class="nav-link link-body-emphasis">
+                <a href="{{route('home')}}" class="nav-link link-body-emphasis">
                     <p class="d-flex align-items-center" style="position:fixed;">
                         <i class="bi bi-house-door" style="font-size: 20px;"></i>
                         <span class="ms-2">Home</span>
@@ -286,12 +295,12 @@
                 </a>
             </li>
             <li>
-            <a href="" class="nav-link link-body-emphasis">
-                <p class="d-flex align-items-center" style="position:fixed;">
-                <i class="bi bi-box2" style="font-size: 20px;"></i>
-                <span class="ms-2">Products</span>
-                </p><br>
-            </a>
+                <a href="" class="nav-link link-body-emphasis">
+                    <p class="d-flex align-items-center" style="position:fixed;">
+                        <i class="bi bi-box2" style="font-size: 20px;"></i>
+                        <span class="ms-2">Products</span>
+                    </p><br>
+                </a>
 
             </li>
 
@@ -304,7 +313,7 @@
                 </a>
             </li>
             <li>
-            <a href="" class="nav-link link-body-emphasis">
+                <a href={{route('orders.index')}} class="nav-link link-body-emphasis">
                     <p class="d-flex align-items-center" style="position:fixed;">
                         <i class="bi bi-cart-check" style="font-size: 20px;"></i>
                         <span class="ms-2">Orders</span>
@@ -312,23 +321,23 @@
                 </a>
             </li>
             <li>
-            <div class="dropdown fixed-bottom-end">
-                <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
-                    data-bs-toggle="dropdown" aria-expanded="true">
-                    <img src="https://avatars.githubusercontent.com/u/162896131?v=4" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <span class="d-print-block"><strong>Quang Hiếu</strong></span>
-                </a>
-                <ul class="dropdown-menu text-small shadow">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
-            </div>
-            </div>
+                <div class="dropdown fixed-bottom-end">
+                    <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="true">
+                        <img src="https://avatars.githubusercontent.com/u/162896131?v=4" alt="" width="32" height="32" class="rounded-circle me-2">
+                        <span class="d-print-block"><strong>Quang Hiếu</strong></span>
+                    </a>
+                    <ul class="dropdown-menu text-small shadow">
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
+                </div>
+                </div>
     </aside>
     <main class="col-sm-10 bg-body-tertiary" id="main">
         <div class="container-fluid">
@@ -336,7 +345,7 @@
             <div
                 class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
                 id="title">
-                <h1 class="h2">Dashboard</h1>
+                <h1 class="h2">@yield('title', 'Dashboard')</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group me-2">
                         <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -353,7 +362,7 @@
         </div>
     </main>
     <!-- Footer -->
-    <footer class="footer_area section_padding_130_0" style="margin-left: 280px;">
+    <footer class="footer_area section_padding_130_0 mt-3" style="margin-left: 280px;">
         <div class="container">
             <div class="row">
                 <!-- Single Widget-->
