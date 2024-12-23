@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="container-xl">
-    <h1 class="my-4">QUẢN LÝ KHÁCH HÀNG</h1>
+    <h1 class="my-4"></h1>
     @if (session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
