@@ -14,17 +14,17 @@ class ProductController extends Controller
     {
         return view('home');
     }
-    public function index()
-    {
-        // Sắp xếp theo ID giảm dần
-        $products = Product::orderBy('id', 'desc')->paginate(10);
-    
-        // Lấy chỉ số của bản ghi đầu tiên (trong trường hợp bạn cần hiển thị)
-        $firstItem = $products->firstItem();
-    
-        return view('products.index', compact('products'));
-    }
-    
+public function index()
+{
+    // Sắp xếp theo ID giảm dần
+    $products = Product::orderBy('id', 'desc')->paginate(10);
+
+    // Lấy chỉ số của bản ghi đầu tiên (trong trường hợp bạn cần hiển thị)
+    $firstItem = $products->firstItem();
+
+    return view('products.index', compact('products'));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -57,25 +57,27 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        return view('products.edit');
+        $product = Product::findOrFail($id); // Lấy sản phẩm theo ID
+        return view('products.edit', compact('product')); // Truyền biến $product vào view
     }
+    
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        $product = Product::findOrFail($id);
+        $products = Product::findOrFail($id);
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'price' => 'required|numeric',
             'quantity' => 'required|integer',
         ]);
-        $product= Product::findOrFail($id);
-        $product->update([
+        $products= Product::findOrFail($id);
+        $products->update([
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
@@ -89,8 +91,8 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $product = Product::findOrFail($id);
-        $product->delete();
+        $products = Product::findOrFail($id);
+        $products->delete();
         return redirect()->route('products.index')->with('success', 'Product deleted successfully!');
     }
 }
