@@ -33,3 +33,11 @@ Route::prefix('order_details')->group(function () {
     Route::put('/{id}', [OrderDetailController::class, 'update'])->name('orderdetails.update');
     Route::delete('/{id}', [OrderDetailController::class, 'destroy'])->name('orderdetails.destroy');
 });
+Route::prefix('customers')->group(function () {
+    Route::get('/', [CustormerController::class, 'index'])->name('customers.index');
+    Route::get('/create', [CustormerController::class, 'create'])->name('customers.create');
+    Route::post('/store', [CustormerController::class, 'store'])->name('customers.store');
+    Route::get('/{id}/edit', [CustormerController::class, 'edit'])->name('customers.edit');
+    Route::put('/{id}', [CustormerController::class, 'update'])->name('customers.update');
+    Route::delete('/{id}', [CustormerController::class, 'destroy'])->name('customers.destroy');
+});
