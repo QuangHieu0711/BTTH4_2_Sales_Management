@@ -17,14 +17,14 @@ class OrderDetail extends Model
         'quantity',
     ];
 
-    public function order()
+    public function customer()
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Customer::class);
     }
 
-    public function product()
+    public function products()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsToMany(Product::class, 'order_details')->withPivot('quantity');
     }
 }
 

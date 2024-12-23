@@ -9,12 +9,11 @@ use Illuminate\Http\Request;
 
 class OrderDetailController extends Controller
 {
-    public function index()
+    public function index($orderId)
     {
-        $orderDetails = OrderDetail::all();
-        return view('order_details.index', compact('orderDetails'));
+        $order = Order::with('products')->findOrFail($orderId);
+        return view('order_details.index', compact('order'));
     }
-
     public function create()
     {
         $orders = Order::all();

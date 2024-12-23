@@ -15,7 +15,7 @@ class OrderController extends Controller
     {
         $orders = Order::with('customer') 
             ->orderBy('id', 'desc')
-            ->paginate(12); 
+            ->paginate(10); 
 
         $page = $request->input('page', 1); // Mặc định là trang 1
         return view('orders.index', compact('orders', 'page'));
@@ -63,13 +63,12 @@ class OrderController extends Controller
     }
 
     // Hiển thị chi tiết đơn hàng
-    public function show(Order $order)
-    {
-        $order->load('orderDetails.product'); 
 
-        return view('orders.show', compact('order'));
-    }
-
+    // public function show(Order $order)
+    // {
+    //     return view('order_details.show', compact('order'));
+    // }
+    
     // Hiển thị form sửa thông tin đơn hàng
     public function edit(Order $order)
     {
