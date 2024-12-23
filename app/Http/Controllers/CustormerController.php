@@ -90,6 +90,14 @@ class CustormerController extends Controller
     {
         //
         $customer = Customer::findOrFail($id);
+
+        // Xóa tất cả các chi tiết đơn hàng liên quan đến đơn hàng của khách hàng
+        foreach ($customer->orders as $order) {
+        $order->orderDetails()->delete();
+        }
+         // Xóa tất cả các đơn hàng liên quan đến khách hàng
+         $customer->orders()->delete();
+        // Xóa khách hàng
         $customer->delete();
 
         return redirect()->route('customers.index')
