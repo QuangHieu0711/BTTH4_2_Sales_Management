@@ -1,7 +1,7 @@
 
 @extends('layouts.app')
 
-@section('title', 'QUẢN LÝ KHÁCH HÀNG (CUSTOMER)')
+@section('title', 'CUSTOMER MANAGEMENT')
 
 @section('content')
 <div class="container-xl">
@@ -23,7 +23,7 @@
             <div class="table-title mt-4">
                 <div class="row">
                     <div class="col-sm-6">
-                        <a href="{{ route('customers.create') }}" class="btn btn-success"><i class="bi bi-person-plus"></i> <span>Thêm khách hàng</span></a>
+                        <a href="{{ route('customers.create') }}" class="btn btn-success"><i class="bi bi-person-plus"></i> <span>ADD CUSTOMER</span></a>
                     </div>
                 </div>
             </div>
@@ -31,11 +31,11 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Tên</th>
-                        <th>Địa chỉ</th>
-                        <th>Số điện thoại</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Phone number</th>
                         <th>Email</th>
-                        <th>Hành động</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,7 +49,7 @@
                         <td>{{ $customer->email }}</td>
                         <td>
                             <!-- Nút chỉnh sửa -->
-                            <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-warning btn-sm" title="Chỉnh sửa khách hàng">
+                            <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-warning btn-sm" title="Edit">
                                 <i class="bi bi-pencil-square" style="font-size: 20px;"></i>
                             </a>
 
@@ -57,7 +57,7 @@
                             <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" title="Xóa khách hàng">
+                                <button type="submit" class="btn btn-danger btn-sm" title="Delete">
                                     <i class="bi bi-trash" style="font-size: 20px;"></i>
                                 </button>
                             </form>
@@ -66,7 +66,7 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center-end">
                 {{ $customers->links() }}
             </div>
         </div>
