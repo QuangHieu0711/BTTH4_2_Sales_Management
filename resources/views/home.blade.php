@@ -278,7 +278,7 @@
 
         <ul class="nav nav-pills flex-column mb-auto">
             <li>
-                <a href="" class="nav-link link-body-emphasis">
+                <a href="{{route('home')}}" class="nav-link link-body-emphasis">
                     <p class="d-flex align-items-center" style="position:fixed;">
                         <i class="bi bi-house-door" style="font-size: 20px;"></i>
                         <span class="ms-2">Home</span>
@@ -304,7 +304,7 @@
                 </a>
             </li>
             <li>
-            <a href="" class="nav-link link-body-emphasis">
+            <a href="{{ route('orders.index') }}"  class="nav-link link-body-emphasis">
                     <p class="d-flex align-items-center" style="position:fixed;">
                         <i class="bi bi-cart-check" style="font-size: 20px;"></i>
                         <span class="ms-2">Orders</span>
@@ -353,7 +353,7 @@
             <div class="row">
             </div>
             <div class="row">
-                <img src="https://relipos.com/wp-content/uploads/2021/06/he-thong-quan-ly-ban-hang-o-sieu-thi-1.jpeg" alt="National Library" class="img-fluid" style="width: 18000px; height: 500px;" />
+                <img src="https://jungleworks.com/wp-content/uploads/2022/04/shutterstock_1974460145-1024x410.jpg" alt="Sales_Management" class="img-fluid" style="width: 16000px; height: 400px;" />
             </div>
     </main>
     <!-- Footer -->
