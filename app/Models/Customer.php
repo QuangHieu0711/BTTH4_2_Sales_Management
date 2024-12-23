@@ -22,7 +22,7 @@ class Customer extends Model
         'address',
         'phone',
         'email',
-        
+
     ];
 
     // Mối quan hệ nhiều-nhiều với bảng products
@@ -30,4 +30,10 @@ class Customer extends Model
     {
         return $this->belongsToMany(Product::class, 'customer_product', 'customer_id', 'product_id');
     }
+    // Trong Customer.php (Model)
+    public function orders()
+    {
+        return $this->hasMany(Order::class); // Mỗi khách hàng có nhiều đơn hàng
+    }
 }
+
