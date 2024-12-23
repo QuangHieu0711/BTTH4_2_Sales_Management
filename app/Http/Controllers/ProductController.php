@@ -16,10 +16,15 @@ class ProductController extends Controller
     }
     public function index()
     {
-        $products = Product::paginate(10);
+        // Sắp xếp theo ID giảm dần
+        $products = Product::orderBy('id', 'desc')->paginate(10);
+    
+        // Lấy chỉ số của bản ghi đầu tiên (trong trường hợp bạn cần hiển thị)
         $firstItem = $products->firstItem();
+    
         return view('products.index', compact('products'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
