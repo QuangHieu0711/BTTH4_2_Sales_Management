@@ -1,10 +1,11 @@
 <?php
 
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Customer extends Model
 {
@@ -22,12 +23,11 @@ class Customer extends Model
         'address',
         'phone',
         'email',
-        
     ];
 
-    // Mối quan hệ nhiều-nhiều với bảng products
-    public function products(): BelongsToMany
+    // Định nghĩa mối quan hệ một-nhiều với bảng orders
+    public function orders(): HasMany
     {
-        return $this->belongsToMany(Product::class, 'customer_product', 'customer_id', 'product_id');
+        return $this->hasMany(Order::class);
     }
 }
