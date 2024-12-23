@@ -24,6 +24,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <style>
+        .form-label {
+            font-weight: bold;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
         .badge-custom {
             display: inline-block;
             padding: 10px 20px;

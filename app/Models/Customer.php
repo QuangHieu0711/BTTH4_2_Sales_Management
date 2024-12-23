@@ -23,11 +23,13 @@ class Customer extends Model
         'address',
         'phone',
         'email',
+        
     ];
 
-    // Định nghĩa mối quan hệ một-nhiều với bảng orders
-    public function orders(): HasMany
+
+    public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class); // Mỗi khách hàng có nhiều đơn hàng
     }
 }
+

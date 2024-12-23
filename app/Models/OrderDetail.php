@@ -22,9 +22,9 @@ class OrderDetail extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function products()
+    public function product()
     {
-        return $this->belongsToMany(Product::class, 'order_details')->withPivot('quantity');
+        return $this->belongsTo(Product::class);
     }
 }
 

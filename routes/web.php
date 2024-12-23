@@ -24,8 +24,10 @@ Route::prefix('orders')->group(function () {
     Route::get('/create', [OrderController::class, 'create'])->name('orders.create'); 
     Route::post('/store', [OrderController::class, 'store'])->name('orders.store');
     Route::get('/{id}/edit', [OrderController::class, 'edit'])->name('orders.edit'); 
-    Route::put('/{id}', [OrderController::class, 'update'])->name('orders.update'); 
+    Route::put('/{id}', [OrderController::class, 'update'])->name('orders.update');
     Route::delete('/{id}', [OrderController::class, 'destroy'])->name('orders.destroy'); 
+    Route::get('/customers/{customer}/orders/history', [OrderController::class, 'customerOrderHistory'])->name('orders.history');
+
 });
 Route::prefix('order_details')->group(function () {
     Route::get('/{order}', [OrderDetailController::class, 'index'])->name('orderdetails.index');
@@ -35,6 +37,7 @@ Route::prefix('order_details')->group(function () {
     Route::put('/{id}', [OrderDetailController::class, 'update'])->name('orderdetails.update');
     Route::delete('/{id}', [OrderDetailController::class, 'destroy'])->name('orderdetails.destroy');
 });
+
 Route::prefix('customers')->group(function () {
     Route::get('/', [CustormerController::class, 'index'])->name('customers.index');
     Route::get('/create', [CustormerController::class, 'create'])->name('customers.create');
