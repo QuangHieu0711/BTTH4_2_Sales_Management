@@ -17,8 +17,8 @@ class Customer extends Model
         'phone',
         'email',
     ];
-    public function orders()
+    public function products()
     {
-        return $this->hasMany(Order::class); // Một khách hàng có thể có nhiều đơn hàng
+        return $this->belongsToMany(Product::class, 'customer_product', 'customer_id', 'product_id');
     }
 }
