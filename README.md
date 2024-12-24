@@ -17,6 +17,9 @@ o Cho phép xem lịch sử mua hàng của từng khách hàng.
 Đây là giao diện trang chủ của quản lý đơn hàng.
 ![Giao diện trang chủ](assets/images/GIAODIENTRANGCHU.png)
 
+Đây là giao diện trang chủ của quản lý sản phẩm.
+![Giao diện sản phẩm](assets/images/GIAODIENSANPHAM.png)
+
 Đây là giao diện quản lý khách hàng.
 ![Giao diện khách hàng](assets/images/GIAODIENKHACHHANG.png)
 
