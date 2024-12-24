@@ -19,3 +19,4 @@ o Cho phép xem lịch sử mua hàng của từng khách hàng.
 
 Đây là giao diện xem chi tiết đơn hàng
 ![Giao diện quản lý đơn hàng](assets/images/GIAODIENXEMCHITIETDONHANG.png)
+
