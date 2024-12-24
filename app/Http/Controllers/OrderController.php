@@ -43,7 +43,7 @@ class OrderController extends Controller
         // Thêm chi tiết đơn hàng
         $this->saveOrderDetails($order, $request->products);
 
-        return redirect()->route('orders.index')->with('success', 'Đơn hàng đã được tạo thành công!');
+        return redirect()->route('orders.index')->with('success', 'The order has been successfully created!');
     }
 
     // Hiển thị chi tiết đơn hàng
